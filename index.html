@@ -3,108 +3,90 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Armazém do Russo</title>
+<title>Armazém do Russo | Gastrobar</title>
 
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #111;
-  color: #fff;
-  padding-bottom: 90px; /* espaço pro carrinho */
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#0f0f0f;
+    color:#fff;
+}
+header{
+    text-align:center;
+    padding:30px 15px;
+}
+header img{
+    max-width:180px;
+    margin-bottom:15px;
+}
+header h1{
+    color:#e53935;
+    margin:10px 0 5px;
+}
+header p{
+    color:#ccc;
 }
 
-header {
-  text-align: center;
-  padding: 20px;
-  background: #000;
+.section{
+    padding:20px 15px;
+}
+.section h2{
+    border-bottom:1px solid #333;
+    padding-bottom:8px;
+    margin-bottom:15px;
 }
 
-header h1 {
-  margin: 0;
-  color: #e53935;
+.card{
+    background:#1c1c1c;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:12px;
+}
+.card h3{
+    margin:0;
+}
+.price{
+    color:#aaa;
+    margin:5px 0;
+}
+button{
+    width:100%;
+    padding:10px;
+    background:#2e7d32;
+    border:none;
+    border-radius:6px;
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+}
+button:hover{
+    background:#388e3c;
+}
+button:disabled{
+    background:#555;
+    cursor:not-allowed;
 }
 
-header p {
-  font-size: 14px;
-  opacity: 0.8;
+#cart{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#2ecc71;
+    color:#000;
+    text-align:center;
+    padding:15px;
+    font-weight:bold;
 }
 
-section {
-  padding: 15px;
-}
-
-h2 {
-  margin-top: 20px;
-  border-bottom: 1px solid #333;
-  padding-bottom: 5px;
-}
-
-.item {
-  background: #1c1c1c;
-  padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-}
-
-.item button {
-  margin-top: 8px;
-  padding: 10px;
-  width: 100%;
-  border: none;
-  border-radius: 6px;
-  background: #2e7d32;
-  color: #fff;
-  font-size: 15px;
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #000;
-  padding: 10px;
-}
-
-footer button {
-  width: 100%;
-  padding: 14px;
-  font-size: 16px;
-  background: #25d366;
-  color: #000;
-  border: none;
-  border-radius: 6px;
-}
-
-#cartModal {
-  position: fixed;
-  top: 5%;
-  left: 5%;
-  width: 90%;
-  background: #222;
-  padding: 20px;
-  border-radius: 10px;
-  display: none;
-  max-height: 85%;
-  overflow-y: auto;
-}
-
-#cartModal ul {
-  list-style: none;
-  padding: 0;
-}
-
-.close {
-  background: #555;
-  color: #fff;
-  margin-top: 10px;
-}
-
-.finalizar {
-  background: #25d366;
-  color: #000;
+footer{
+    margin-top:80px;
+    padding:20px;
+    text-align:center;
+    background:#111;
+    color:#777;
+    font-size:14px;
 }
 </style>
 </head>
@@ -112,110 +94,101 @@ footer button {
 <body>
 
 <header>
-  <h1>Armazém do Russo</h1>
-  <p>Escolha seu pedido e finalize pelo WhatsApp</p>
+    <img src="logo.png" alt="Armazém do Russo">
+    <h1>Armazém do Russo</h1>
+    <p>Escolha seu pedido e finalize pelo WhatsApp</p>
 </header>
 
-<main id="menu"></main>
+<!-- PORÇÕES -->
+<div class="section">
+<h2>🍟 Porções</h2>
 
-<footer>
-  <button onclick="abrirCarrinho()">
-    🛒 Carrinho — R$ <span id="total">0.00</span>
-  </button>
-</footer>
-
-<div id="cartModal">
-  <h2>Seu pedido</h2>
-  <ul id="cartItems"></ul>
-  <p><strong>Total: R$ <span id="cartTotal">0.00</span></strong></p>
-  <button class="finalizar" onclick="finalizarPedido()">Finalizar no WhatsApp</button>
-  <button class="close" onclick="fecharCarrinho()">Fechar</button>
+<div class="card"><h3>Picanha c/ Frita e Camarão</h3><p class="price">R$ 140,00 | 1/2 R$ 90,00</p><button onclick="add('Picanha c/ Frita e Camarão',140)">Adicionar</button></div>
+<div class="card"><h3>Picanha com Fritas</h3><p class="price">R$ 90,00 | 1/2 R$ 50,00</p><button onclick="add('Picanha com Fritas',90)">Adicionar</button></div>
+<div class="card"><h3>Gurjão do Russo</h3><p class="price">R$ 55,00 | 1/2 R$ 35,00</p><button onclick="add('Gurjão do Russo',55)">Adicionar</button></div>
+<div class="card"><h3>Gurjão de Peixe</h3><p class="price">R$ 45,00 | 1/2 R$ 25,00</p><button onclick="add('Gurjão de Peixe',45)">Adicionar</button></div>
+<div class="card"><h3>Bolinho de Bacalhau</h3><p class="price">R$ 28,00 | 1/2 R$ 18,00</p><button onclick="add('Bolinho de Bacalhau',28)">Adicionar</button></div>
+<div class="card"><h3>Croquete de Camarão</h3><p class="price">R$ 30,00 | 1/2 R$ 18,00</p><button onclick="add('Croquete de Camarão',30)">Adicionar</button></div>
+<div class="card"><h3>Camarão Alho e Óleo</h3><p class="price">R$ 45,00 | 1/2 R$ 25,00</p><button onclick="add('Camarão Alho e Óleo',45)">Adicionar</button></div>
+<div class="card"><h3>Camarão à Milanesa</h3><p class="price">R$ 45,00 | 1/2 R$ 25,00</p><button onclick="add('Camarão à Milanesa',45)">Adicionar</button></div>
+<div class="card"><h3>Batata com Camarão</h3><p class="price">R$ 50,00 | 1/2 R$ 30,00</p><button onclick="add('Batata com Camarão',50)">Adicionar</button></div>
+<div class="card"><h3>Batata Turbinada</h3><p class="price">R$ 40,00</p><button onclick="add('Batata Turbinada',40)">Adicionar</button></div>
+<div class="card"><h3>Batata Frita</h3><p class="price">R$ 25,00</p><button onclick="add('Batata Frita',25)">Adicionar</button></div>
+<div class="card"><h3>Mandioca</h3><p class="price">R$ 25,00</p><button onclick="add('Mandioca',25)">Adicionar</button></div>
+<div class="card"><h3>Frango à Passarinho</h3><p class="price">R$ 40,00</p><button onclick="add('Frango à Passarinho',40)">Adicionar</button></div>
+<div class="card"><h3>Frango à Passarinho com Batata</h3><p class="price">R$ 50,00</p><button onclick="add('Frango à Passarinho com Batata',50)">Adicionar</button></div>
 </div>
 
+<!-- REFEIÇÕES -->
+<div class="section">
+<h2 id="refeicoes-title">🍽️ Refeições — somente aos fins de semana</h2>
+<p id="refeicoes-info" style="color:#bbb; font-size:14px; margin-bottom:15px;">
+Servidas aos sábados e domingos, das 12h às 16h
+</p>
+
+<div class="card"><h3>Contra-Filé com Fritas</h3><p class="price">R$ 30,00</p><button data-refeicao onclick="add('Contra-Filé com Fritas',30)">Adicionar</button></div>
+<div class="card"><h3>Filé de Peixe com Molho de Camarão</h3><p class="price">R$ 30,00</p><button data-refeicao onclick="add('Filé de Peixe com Molho de Camarão',30)">Adicionar</button></div>
+<div class="card"><h3>Costelinha BBQ</h3><p class="price">R$ 35,00</p><button data-refeicao onclick="add('Costelinha BBQ',35)">Adicionar</button></div>
+<div class="card"><h3>Picanha com Fritas</h3><p class="price">R$ 35,00</p><button data-refeicao onclick="add('Picanha com Fritas (Refeição)',35)">Adicionar</button></div>
+</div>
+
+<!-- BEBIDAS -->
+<div class="section">
+<h2>🍺 Bebidas</h2>
+
+<div class="card"><h3>Heineken Long Neck</h3><p class="price">R$ 8,00</p><button onclick="add('Heineken Long Neck',8)">Adicionar</button></div>
+<div class="card"><h3>Budweiser Long Neck</h3><p class="price">R$ 7,00</p><button onclick="add('Budweiser Long Neck',7)">Adicionar</button></div>
+<div class="card"><h3>Corona Long Neck</h3><p class="price">R$ 8,00</p><button onclick="add('Corona Long Neck',8)">Adicionar</button></div>
+<div class="card"><h3>Stella Artois Long Neck</h3><p class="price">R$ 8,00</p><button onclick="add('Stella Artois',8)">Adicionar</button></div>
+<div class="card"><h3>Água 500ml</h3><p class="price">R$ 3,00</p><button onclick="add('Água 500ml',3)">Adicionar</button></div>
+<div class="card"><h3>Refrigerante Lata</h3><p class="price">R$ 7,00</p><button onclick="add('Refrigerante Lata',7)">Adicionar</button></div>
+<div class="card"><h3>RedBull</h3><p class="price">R$ 15,00</p><button onclick="add('RedBull',15)">Adicionar</button></div>
+</div>
+
+<footer>
+Desenvolvido por <strong>StudioCapta</strong> — Direitos Reservados
+</footer>
+
+<div id="cart">🛒 Carrinho — R$ <span id="total">0.00</span></div>
+
 <script>
-const whatsappNumero = "5521999999999"; // TROQUE AQUI
+let total = 0;
+let items = [];
 
-const menuData = [
-  {
-    categoria: "🍟 Petiscos",
-    itens: [
-      { nome: "Batata Frita", preco: 18 },
-      { nome: "Calabresa Acebolada", preco: 25 }
-    ]
-  },
-  {
-    categoria: "🍺 Bebidas",
-    itens: [
-      { nome: "Heineken Long Neck", preco: 9 },
-      { nome: "Refrigerante Lata", preco: 6 }
-    ]
-  }
-];
-
-let carrinho = [];
-
-const menu = document.getElementById("menu");
-
-menuData.forEach(sec => {
-  const section = document.createElement("section");
-  section.innerHTML = `<h2>${sec.categoria}</h2>`;
-
-  sec.itens.forEach(item => {
-    const div = document.createElement("div");
-    div.className = "item";
-    div.innerHTML = `
-      <strong>${item.nome}</strong><br>
-      R$ ${item.preco.toFixed(2)}<br>
-      <button onclick='adicionarItem("${item.nome}", ${item.preco})'>
-        Adicionar
-      </button>
-    `;
-    section.appendChild(div);
-  });
-
-  menu.appendChild(section);
-});
-
-function adicionarItem(nome, preco) {
-  carrinho.push({ nome, preco });
-  atualizarTotal();
+function add(name, price){
+    total += price;
+    items.push(name + " - R$ " + price.toFixed(2));
+    document.getElementById("total").innerText = total.toFixed(2);
+    document.getElementById("cart").onclick = checkout;
 }
 
-function atualizarTotal() {
-  const total = carrinho.reduce((s, i) => s + i.preco, 0);
-  document.getElementById("total").innerText = total.toFixed(2);
-  document.getElementById("cartTotal").innerText = total.toFixed(2);
+function checkout(){
+    let text = "Olá! Gostaria de fazer um pedido no Armazém do Russo:%0A%0A";
+    items.forEach(i => text += "- " + i + "%0A");
+    text += "%0ATotal: R$ " + total.toFixed(2);
+    window.open("https://wa.me/5521976536117?text=" + text);
 }
 
-function abrirCarrinho() {
-  listarCarrinho();
-  document.getElementById("cartModal").style.display = "block";
-}
+// BLOQUEIO AUTOMÁTICO REFEIÇÕES
+function verificarHorarioRefeicoes(){
+    const agora = new Date();
+    const dia = agora.getDay(); // 0 domingo | 6 sábado
+    const hora = agora.getHours();
 
-function fecharCarrinho() {
-  document.getElementById("cartModal").style.display = "none";
-}
+    const permitido = (dia === 0 || dia === 6) && (hora >= 12 && hora < 16);
+    const botoes = document.querySelectorAll('[data-refeicao]');
+    const info = document.getElementById('refeicoes-info');
 
-function listarCarrinho() {
-  const ul = document.getElementById("cartItems");
-  ul.innerHTML = "";
-  carrinho.forEach(item => {
-    const li = document.createElement("li");
-    li.innerText = `• ${item.nome} — R$ ${item.preco.toFixed(2)}`;
-    ul.appendChild(li);
-  });
+    if(!permitido){
+        botoes.forEach(btn=>{
+            btn.disabled = true;
+            btn.innerText = 'Indisponível no momento';
+        });
+        info.innerHTML = '⛔ Refeições disponíveis apenas aos sábados e domingos, das 12h às 16h';
+        info.style.color = '#ff5252';
+    }
 }
-
-function finalizarPedido() {
-  let mensagem = "Olá! Quero fazer um pedido no Armazém do Russo:%0A%0A";
-  carrinho.forEach(i => {
-    mensagem += `• ${i.nome} - R$ ${i.preco.toFixed(2)}%0A`;
-  });
-  const total = carrinho.reduce((s, i) => s + i.preco, 0);
-  mensagem += `%0ATotal: R$ ${total.toFixed(2)}%0A%0APode me informar taxa de entrega e forma de pagamento?`;
-
-  window.open(`https://wa.me/${whatsappNumero}?text=${mensagem}`, "_blank");
-}
+verificarHorarioRefeicoes();
 </script>
 
 </body>
