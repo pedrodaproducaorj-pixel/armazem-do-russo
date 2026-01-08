@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Armazém do Russo | Gastrobar</title>
+
+<style>
+:root{
+  --vermelho:#c62828;
+  --dourado:#c9a24d;
+  --preto:#0f0f0f;
+  --cinza:#1c1c1c;
+  --cinza2:#2a2a2a;
+  --branco:#fff;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--preto);
+  color:var(--branco);
+}
+
+header{
+  text-align:center;
+  padding:20px;
+}
+
+header img{
+  max-width:220px;
+}
+
+section{
+  padding:20px;
+}
+
+h2{
+  color:var(--dourado);
+  border-bottom:1px solid #333;
+  padding-bottom:6px;
+  cursor:pointer;
+}
+
+.accordion-content{
+  display:none;
+}
+
+.item{
+  background:var(--cinza);
+  border-radius:14px;
+  padding:15px;
+  margin-top:12px;
+}
+
+.item h3{margin:0}
+.item p{margin:6px 0;color:#ccc}
+
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:var(--vermelho);
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button.sec{
+  background:var(--cinza2);
+  border:1px solid #444;
+  margin-top:6px;
+}
+
+button:disabled{
+  background:#555;
+  cursor:not-allowed;
+}
+
+#cart{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:var(--dourado);
+  color:#000;
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:bold;
+}
+
+#cart button{
+  width:auto;
+  background:#000;
+  color:#fff;
+  padding:8px 14px;
+  border-radius:6px;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.modal-content{
+  background:#1e1e1e;
+  padding:20px;
+  border-radius:12px;
+  width:90%;
+  max-width:320px;
+}
+
+footer{
+  text-align:center;
+  padding:30px 10px 110px;
+  color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="logo-armazem.png" alt="Armazém do Russo">
+</header>
+
+<!-- PORÇÕES -->
+<section>
+<h2 onclick="toggle('porcoes')">🍟 Porções</h2>
+<div id="porcoes" class="accordion-content">
+
+<div class="item">
+<h3>Picanha com Fritas</h3>
+<p>Inteira R$ 90,00 | Meia R$ 50,00</p>
+<button onclick="openSize('Picanha com Fritas',90,50)">Escolher tamanho</button>
+</div>
+
+<div class="item">
+<h3>Gurjão do Russo</h3>
+<p>Inteira R$ 55,00 | Meia R$ 35,00</p>
+<button onclick="openSize('Gurjão do Russo',55,35)">Escolher tamanho</button>
+</div>
+
+<div class="item">
+<h3>Bolinho de Bacalhau</h3>
+<p>Inteira R$ 28,00 | Meia R$ 18,00</p>
+<button onclick="openSize('Bolinho de Bacalhau',28,18)">Escolher tamanho</button>
+</div>
+
+<div class="item">
+<h3>Frango à Passarinho</h3>
+<p>R$ 40,00</p>
+<button onclick="addItem('Frango à Passarinho',40)">Adicionar</button>
+</div>
+
+</div>
+</section>
+
+<!-- BEBIDAS -->
+<section>
+<h2 onclick="toggle('bebidas')">🍺 Bebidas</h2>
+<div id="bebidas" class="accordion-content">
+
+<div class="item"><h3>Heineken Long Neck</h3><p>R$ 8,00</p><button onclick="addItem('Heineken Long Neck',8)">Adicionar</button></div>
+<div class="item"><h3>Budweiser Long Neck</h3><p>R$ 7,00</p><button onclick="addItem('Budweiser Long Neck',7)">Adicionar</button></div>
+<div class="item"><h3>Refrigerante Lata</h3><p>R$ 7,00</p><button onclick="addItem('Refrigerante Lata',7)">Adicionar</button></div>
+<div class="item"><h3>Água</h3><p>R$ 3,00</p><button onclick="addItem('Água',3)">Adicionar</button></div>
+
+</div>
+</section>
+
+<!-- REFEIÇÕES -->
+<section>
+<h2>🍽️ Refeições (Somente fins de semana 12h–16h)</h2>
+
+<div class="item">
+<h3>Contra-Filé com fritas</h3>
+<p>R$ 30,00</p>
+<button id="r1">Adicionar</button>
+</div>
+
+<div class="item">
+<h3>Filé de Peixe com molho de camarão</h3>
+<p>R$ 30,00</p>
+<button id="r2">Adicionar</button>
+</div>
+
+<div class="item">
+<h3>Costelinha BBQ</h3>
+<p>R$ 35,00</p>
+<button id="r3">Adicionar</button>
+</div>
+
+<div class="item">
+<h3>Picanha com fritas</h3>
+<p>R$ 35,00</p>
+<button id="r4">Adicionar</button>
+</div>
+
+</section>
+
+<footer>
+Desenvolvido por <strong>StudioCapta</strong> — direitos reservados
+</footer>
+
+<div id="cart">
+<span>R$ <span id="total">0.00</span></span>
+<div>
+<button onclick="clearCart()">Limpar</button>
+<button onclick="sendWhats()">Finalizar</button>
+</div>
+</div>
+
+<!-- MODAL TAMANHO -->
+<div class="modal" id="sizeModal">
+<div class="modal-content">
+<h3 id="sizeTitle"></h3>
+<button onclick="chooseSize('Inteira')">Inteira</button>
+<button class="sec" onclick="chooseSize('Meia')">Meia</button>
+<button class="sec" onclick="closeModal()">Cancelar</button>
+</div>
+</div>
+
+<script>
+let cart=[]
+let total=0
+let currentItem=null
+
+function toggle(id){
+  const el=document.getElementById(id)
+  el.style.display=el.style.display==='block'?'none':'block'
+}
+
+function addItem(name,price){
+  cart.push(`${name} - R$ ${price.toFixed(2)}`)
+  total+=price
+  update()
+}
+
+function openSize(name,full,half){
+  currentItem={name,full,half}
+  document.getElementById('sizeTitle').innerText=name
+  document.getElementById('sizeModal').style.display='flex'
+}
+
+function chooseSize(type){
+  let price=type==='Inteira'?currentItem.full:currentItem.half
+  cart.push(`${currentItem.name} (${type}) - R$ ${price.toFixed(2)}`)
+  total+=price
+  closeModal()
+  update()
+}
+
+function closeModal(){
+  document.getElementById('sizeModal').style.display='none'
+}
+
+function update(){
+  document.getElementById('total').innerText=total.toFixed(2)
+}
+
+function clearCart(){
+  cart=[]
+  total=0
+  update()
+}
+
+function sendWhats(){
+  let msg='Pedido - Armazém do Russo%0A%0A'
+  cart.forEach(i=>msg+=`• ${i}%0A`)
+  msg+=`%0ATotal: R$ ${total.toFixed(2)}`
+  window.open(`https://wa.me/5521976536117?text=${msg}`)
+}
+
+// BLOQUEIO REFEIÇÕES
+(function(){
+  const d=new Date()
+  const day=d.getDay()
+  const h=d.getHours()
+  if(!(day===0||day===6)||h<12||h>=16){
+    document.querySelectorAll('#r1,#r2,#r3,#r4').forEach(b=>{
+      b.disabled=true
+      b.innerText='Indisponível agora'
+    })
+  }else{
+    r1.onclick=()=>addItem('Contra-Filé com fritas',30)
+    r2.onclick=()=>addItem('Filé de Peixe com molho de camarão',30)
+    r3.onclick=()=>addItem('Costelinha BBQ',35)
+    r4.onclick=()=>addItem('Picanha com fritas',35)
+  }
+})();
+</script>
+
+</body>
+</html>
