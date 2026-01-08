@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Armazém do Russo | Gastrobar</title>
 
 <style>
@@ -11,7 +11,7 @@
   --dourado:#c9a24d;
   --preto:#0f0f0f;
   --cinza:#1c1c1c;
-  --branco:#ffffff;
+  --branco:#fff;
 }
 
 *{box-sizing:border-box}
@@ -27,14 +27,9 @@ header{
   text-align:center;
   padding:20px;
 }
+header img{max-width:220px}
 
-header img{
-  max-width:220px;
-}
-
-section{
-  padding:20px;
-}
+section{padding:20px}
 
 h2{
   color:var(--dourado);
@@ -44,35 +39,26 @@ h2{
 
 .item{
   background:var(--cinza);
-  border-radius:12px;
+  border-radius:14px;
   padding:15px;
   margin-top:12px;
 }
 
-.item h3{
-  margin:0;
-  color:var(--branco);
-}
-
-.item p{
-  margin:5px 0 10px;
-  color:#ccc;
-}
+.item h3{margin:0}
+.item p{color:#ccc;margin:6px 0}
 
 button{
   width:100%;
   padding:12px;
   border:none;
   border-radius:8px;
-  font-size:16px;
   background:var(--vermelho);
-  color:white;
+  color:#fff;
+  font-size:16px;
   cursor:pointer;
 }
 
-button:disabled{
-  background:#555;
-}
+button:disabled{background:#555}
 
 #cart{
   position:fixed;
@@ -82,8 +68,8 @@ button:disabled{
   background:var(--dourado);
   color:#000;
   padding:15px;
-  font-weight:bold;
   text-align:center;
+  font-weight:bold;
 }
 
 .modal{
@@ -104,15 +90,10 @@ button:disabled{
   max-width:320px;
 }
 
-.modal-content h3{
-  text-align:center;
-  margin-bottom:10px;
-}
-
 footer{
   text-align:center;
+  padding:30px 10px 90px;
   font-size:14px;
-  padding:30px 10px 80px;
   color:#aaa;
 }
 </style>
@@ -124,28 +105,96 @@ footer{
   <img src="logo-armazem.png" alt="Armazém do Russo">
 </header>
 
+<!-- PORÇÕES -->
 <section>
 <h2>🍟 Porções</h2>
 
 <div class="item">
+<h3>Picanha c/ Frita e Camarão</h3>
+<p>R$ 140,00 | 1/2 R$ 90,00</p>
+<button onclick="porcao('Picanha c/ Frita e Camarão',140,90)">Escolher tamanho</button>
+</div>
+
+<div class="item">
 <h3>Picanha com Fritas</h3>
 <p>R$ 90,00 | 1/2 R$ 50,00</p>
-<button onclick="escolherPorcao('Picanha com Fritas',90,50)">Escolher tamanho</button>
+<button onclick="porcao('Picanha com Fritas',90,50)">Escolher tamanho</button>
 </div>
 
 <div class="item">
 <h3>Gurjão do Russo</h3>
 <p>R$ 55,00 | 1/2 R$ 35,00</p>
-<button onclick="escolherPorcao('Gurjão do Russo',55,35)">Escolher tamanho</button>
+<button onclick="porcao('Gurjão do Russo',55,35)">Escolher tamanho</button>
+</div>
+
+<div class="item">
+<h3>Gurjão de Peixe</h3>
+<p>R$ 45,00 | 1/2 R$ 25,00</p>
+<button onclick="porcao('Gurjão de Peixe',45,25)">Escolher tamanho</button>
 </div>
 
 <div class="item">
 <h3>Bolinho de Bacalhau</h3>
 <p>R$ 28,00 | 1/2 R$ 18,00</p>
-<button onclick="escolherPorcao('Bolinho de Bacalhau',28,18)">Escolher tamanho</button>
+<button onclick="porcao('Bolinho de Bacalhau',28,18)">Escolher tamanho</button>
+</div>
+
+<div class="item">
+<h3>Croquete de Camarão</h3>
+<p>R$ 30,00 | 1/2 R$ 18,00</p>
+<button onclick="porcao('Croquete de Camarão',30,18)">Escolher tamanho</button>
+</div>
+
+<div class="item">
+<h3>Camarão Alho e Óleo</h3>
+<p>R$ 45,00 | 1/2 R$ 25,00</p>
+<button onclick="porcao('Camarão Alho e Óleo',45,25)">Escolher tamanho</button>
+</div>
+
+<div class="item">
+<h3>Camarão à Milanesa</h3>
+<p>R$ 45,00 | 1/2 R$ 25,00</p>
+<button onclick="porcao('Camarão à Milanesa',45,25)">Escolher tamanho</button>
+</div>
+
+<div class="item">
+<h3>Batata com Camarão</h3>
+<p>R$ 50,00 | 1/2 R$ 30,00</p>
+<button onclick="porcao('Batata com Camarão',50,30)">Escolher tamanho</button>
+</div>
+
+<div class="item">
+<h3>Batata Turbinada</h3>
+<p>R$ 40,00</p>
+<button onclick="addItem('Batata Turbinada',40)">Adicionar</button>
+</div>
+
+<div class="item">
+<h3>Batata Frita</h3>
+<p>R$ 25,00</p>
+<button onclick="addItem('Batata Frita',25)">Adicionar</button>
+</div>
+
+<div class="item">
+<h3>Mandioquinha</h3>
+<p>R$ 25,00</p>
+<button onclick="addItem('Mandioquinha',25)">Adicionar</button>
+</div>
+
+<div class="item">
+<h3>Frango à Passarinho</h3>
+<p>R$ 40,00</p>
+<button onclick="addItem('Frango à Passarinho',40)">Adicionar</button>
+</div>
+
+<div class="item">
+<h3>Frango à Passarinho com Batata</h3>
+<p>R$ 50,00</p>
+<button onclick="addItem('Frango à Passarinho com Batata',50)">Adicionar</button>
 </div>
 </section>
 
+<!-- BEBIDAS -->
 <section>
 <h2>🍺 Bebidas</h2>
 
@@ -162,32 +211,14 @@ footer{
 </div>
 </section>
 
+<!-- REFEIÇÕES -->
 <section id="refeicoes">
-<h2>🍽️ Refeições <small>(Somente fins de semana 12h–16h)</small></h2>
+<h2>🍽️ Refeições (Somente fins de semana 12h–16h)</h2>
 
-<div class="item">
-<h3>Contra-Filé com fritas</h3>
-<p>R$ 30,00</p>
-<button onclick="addItem('Contra-Filé com fritas',30)">Adicionar</button>
-</div>
-
-<div class="item">
-<h3>Filé de Peixe com molho de camarão</h3>
-<p>R$ 30,00</p>
-<button onclick="addItem('Filé de Peixe com molho de camarão',30)">Adicionar</button>
-</div>
-
-<div class="item">
-<h3>Costelinha BBQ</h3>
-<p>R$ 35,00</p>
-<button onclick="addItem('Costelinha BBQ',35)">Adicionar</button>
-</div>
-
-<div class="item">
-<h3>Picanha com fritas</h3>
-<p>R$ 35,00</p>
-<button onclick="addItem('Picanha com fritas (Refeição)',35)">Adicionar</button>
-</div>
+<div class="item"><h3>Contra-Filé com fritas</h3><p>R$ 30,00</p><button onclick="addItem('Contra-Filé com fritas',30)">Adicionar</button></div>
+<div class="item"><h3>Filé de Peixe c/ molho de camarão</h3><p>R$ 30,00</p><button onclick="addItem('Filé de Peixe com molho de camarão',30)">Adicionar</button></div>
+<div class="item"><h3>Costelinha BBQ</h3><p>R$ 35,00</p><button onclick="addItem('Costelinha BBQ',35)">Adicionar</button></div>
+<div class="item"><h3>Picanha com fritas</h3><p>R$ 35,00</p><button onclick="addItem('Picanha com fritas (Refeição)',35)">Adicionar</button></div>
 </section>
 
 <footer>
@@ -206,43 +237,31 @@ Desenvolvido por <strong>StudioCapta</strong> — direitos reservados
 </div>
 
 <script>
-let cart=[]
 let total=0
 
-function updateCart(){
+function atualizar(){
   document.getElementById('total').innerText=total.toFixed(2)
 }
 
 function addItem(nome,preco){
-  cart.push({nome,preco})
   total+=preco
-  updateCart()
+  atualizar()
 }
 
-function escolherPorcao(nome,inteira,meia){
+function porcao(nome,i,m){
   document.getElementById('modalTitle').innerText=nome
-  document.getElementById('btnInteira').innerText=`Porção Inteira — R$ ${inteira.toFixed(2)}`
-  document.getElementById('btnInteira').onclick=()=>{
-    addItem(`${nome} (Inteira)`,inteira)
-    closeModal()
-  }
-  document.getElementById('btnMeia').innerText=`Meia Porção — R$ ${meia.toFixed(2)}`
-  document.getElementById('btnMeia').onclick=()=>{
-    addItem(`${nome} (Meia)`,meia)
-    closeModal()
-  }
-  document.getElementById('modal').style.display='flex'
+  btnInteira.innerText=`Porção Inteira — R$ ${i.toFixed(2)}`
+  btnMeia.innerText=`Meia Porção — R$ ${m.toFixed(2)}`
+  btnInteira.onclick=()=>{addItem(nome+' (Inteira)',i);closeModal()}
+  btnMeia.onclick=()=>{addItem(nome+' (Meia)',m);closeModal()}
+  modal.style.display='flex'
 }
 
-function closeModal(){
-  document.getElementById('modal').style.display='none'
-}
+function closeModal(){modal.style.display='none'}
 
 function bloquearRefeicoes(){
-  const agora=new Date()
-  const dia=agora.getDay()
-  const hora=agora.getHours()
-  if(!(dia===0||dia===6)||hora<12||hora>=16){
+  const d=new Date(),dia=d.getDay(),h=d.getHours()
+  if(!(dia==0||dia==6)||h<12||h>=16){
     document.querySelectorAll('#refeicoes button').forEach(b=>{
       b.disabled=true
       b.innerText='Indisponível agora'
