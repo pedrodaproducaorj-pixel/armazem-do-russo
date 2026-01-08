@@ -10,77 +10,71 @@
   --vermelho:#c62828;
   --dourado:#c9a24d;
   --preto:#0f0f0f;
-  --card:#1c1c1c;
+  --cinza:#1c1c1c;
+  --branco:#fff;
 }
 *{box-sizing:border-box}
 body{
   margin:0;
-  background:var(--preto);
-  color:#fff;
   font-family:Arial,Helvetica,sans-serif;
+  background:var(--preto);
+  color:var(--branco);
 }
 header{
   text-align:center;
   padding:20px;
+  border-bottom:2px solid var(--dourado);
 }
-header img{max-width:160px}
-header h1{
-  color:var(--vermelho);
-  font-size:34px;
-  margin:10px 0;
-}
-header .horarios{
-  color:var(--dourado);
+header img{max-width:160px;margin-bottom:10px}
+header h1{margin:0;color:var(--vermelho);font-size:32px}
+.horarios{
+  margin-top:10px;
+  border:1px solid var(--dourado);
+  padding:10px;
+  border-radius:8px;
   font-size:14px;
-  line-height:1.4;
 }
-section{padding:15px}
-h2{
-  color:var(--dourado);
-  margin-top:30px;
-  cursor:pointer;
-}
+section{padding:20px}
+h2{color:var(--dourado);cursor:pointer}
+.subtitulo{color:var(--dourado);margin:20px 0 10px;font-weight:bold}
 .accordion{display:none}
 .item{
-  background:var(--card);
-  padding:15px;
+  background:var(--cinza);
   border-radius:12px;
+  padding:15px;
   margin-bottom:12px;
 }
 .item h4{margin:0 0 5px}
 .item p{margin:0 0 10px;color:#ccc}
 button{
-  background:var(--vermelho);
-  color:#fff;
+  width:100%;
+  padding:12px;
   border:none;
   border-radius:8px;
-  padding:10px;
-  width:100%;
-  font-size:15px;
+  background:var(--vermelho);
+  color:#fff;
+  font-size:16px;
 }
-.subtitulo{
-  margin:20px 0 10px;
-  color:var(--dourado);
-  font-weight:bold;
-}
-.carrinho{
+.cart{
   position:fixed;
   bottom:0;left:0;right:0;
   background:var(--dourado);
+  color:#000;
+  padding:10px;
   display:flex;
   justify-content:space-between;
-  padding:10px;
+  align-items:center;
 }
-.carrinho span{color:#000;font-weight:bold}
-.carrinho button{
+.cart button{
   background:#000;
+  color:#fff;
   width:auto;
   margin-left:8px;
 }
 footer{
   text-align:center;
   padding:20px;
-  font-size:13px;
+  font-size:12px;
   color:#aaa;
 }
 </style>
@@ -100,73 +94,175 @@ footer{
   </div>
 </header>
 
+<!-- PORÇÕES -->
 <section>
-<h2 onclick="toggle('bebidas')">🍺 Bebidas</h2>
-<div id="bebidas" class="accordion">
+<h2 onclick="toggle('porcoes')">🍟 Porções</h2>
+<div id="porcoes" class="accordion">
 
-<div class="subtitulo">🍺 CERVEJAS — LONG NECK</div>
+<div class="item"><h4>Picanha c/ Frita e Camarão</h4><p>Inteira R$140 | Meia R$90</p>
+<button onclick="add('Picanha c/ Frita e Camarão (Inteira)',140)">Inteira</button>
+<button onclick="add('Picanha c/ Frita e Camarão (Meia)',90)">Meia</button></div>
 
-<div class="item"><h4>Heineken</h4><p>R$ 8,00</p><button onclick="add('Heineken Long Neck',8)">Adicionar</button></div>
-<div class="item"><h4>Budweiser</h4><p>R$ 7,00</p><button onclick="add('Budweiser Long Neck',7)">Adicionar</button></div>
-<div class="item"><h4>Império Gold</h4><p>R$ 7,00</p><button onclick="add('Império Gold Long Neck',7)">Adicionar</button></div>
-<div class="item"><h4>Império Lager</h4><p>R$ 7,00</p><button onclick="add('Império Lager Long Neck',7)">Adicionar</button></div>
-<div class="item"><h4>Corona</h4><p>R$ 8,00</p><button onclick="add('Corona Long Neck',8)">Adicionar</button></div>
-<div class="item"><h4>Stella Artois</h4><p>R$ 8,00</p><button onclick="add('Stella Artois Long Neck',8)">Adicionar</button></div>
+<div class="item"><h4>Picanha com Fritas</h4><p>Inteira R$90 | Meia R$50</p>
+<button onclick="add('Picanha com Fritas (Inteira)',90)">Inteira</button>
+<button onclick="add('Picanha com Fritas (Meia)',50)">Meia</button></div>
 
-<div class="subtitulo">🍾 GARRAFA 600ML</div>
+<div class="item"><h4>Gurjão do Russo</h4><p>Inteira R$55 | Meia R$35</p>
+<button onclick="add('Gurjão do Russo (Inteira)',55)">Inteira</button>
+<button onclick="add('Gurjão do Russo (Meia)',35)">Meia</button></div>
 
-<div class="item"><h4>Heineken</h4><p>R$ 15,00</p><button onclick="add('Heineken 600ml',15)">Adicionar</button></div>
-<div class="item"><h4>Império Lager</h4><p>R$ 12,00</p><button onclick="add('Império Lager 600ml',12)">Adicionar</button></div>
-<div class="item"><h4>Império Gold</h4><p>R$ 13,00</p><button onclick="add('Império Gold 600ml',13)">Adicionar</button></div>
-<div class="item"><h4>Stella Artois</h4><p>R$ 13,00</p><button onclick="add('Stella Artois 600ml',13)">Adicionar</button></div>
-<div class="item"><h4>Pink Moon</h4><p>R$ 12,00</p><button onclick="add('Pink Moon 600ml',12)">Adicionar</button></div>
+<div class="item"><h4>Gurjão de Peixe</h4><p>Inteira R$45 | Meia R$25</p>
+<button onclick="add('Gurjão de Peixe (Inteira)',45)">Inteira</button>
+<button onclick="add('Gurjão de Peixe (Meia)',25)">Meia</button></div>
 
-<div class="subtitulo">🍺 LATÃO 473ML</div>
+<div class="item"><h4>Bolinho de Bacalhau</h4><p>Inteira R$28 | Meia R$18</p>
+<button onclick="add('Bolinho de Bacalhau (Inteira)',28)">Inteira</button>
+<button onclick="add('Bolinho de Bacalhau (Meia)',18)">Meia</button></div>
 
-<div class="item"><h4>Brahma</h4><p>R$ 7,00</p><button onclick="add('Brahma Latão',7)">Adicionar</button></div>
-<div class="item"><h4>Antarctica</h4><p>R$ 7,00</p><button onclick="add('Antarctica Latão',7)">Adicionar</button></div>
-<div class="subtitulo">🥃 COMBOS</div>
+<div class="item"><h4>Croquete de Camarão</h4><p>Inteira R$30 | Meia R$18</p>
+<button onclick="add('Croquete de Camarão (Inteira)',30)">Inteira</button>
+<button onclick="add('Croquete de Camarão (Meia)',18)">Meia</button></div>
 
-<div class="item"><h4>Red Label</h4><p>R$ 200,00</p><button onclick="add('Combo Red Label',200)">Adicionar</button></div>
-<div class="item"><h4>Red Label Energético</h4><p>R$ 190,00</p><button onclick="add('Combo Red Label Energético',190)">Adicionar</button></div>
-<div class="item"><h4>Black Label</h4><p>R$ 280,00</p><button onclick="add('Combo Black Label',280)">Adicionar</button></div>
-<div class="item"><h4>Black Label Energético</h4><p>R$ 260,00</p><button onclick="add('Combo Black Label Energético',260)">Adicionar</button></div>
-<div class="item"><h4>Buchanan's</h4><p>R$ 300,00</p><button onclick="add('Combo Buchanan’s',300)">Adicionar</button></div>
-<div class="item"><h4>Buchanan's Energético</h4><p>R$ 280,00</p><button onclick="add('Combo Buchanan’s Energético',280)">Adicionar</button></div>
-<div class="item"><h4>Jack Daniel’s</h4><p>R$ 250,00</p><button onclick="add('Combo Jack Daniel’s',250)">Adicionar</button></div>
-<div class="item"><h4>Jack Daniel’s Energético</h4><p>R$ 220,00</p><button onclick="add('Combo Jack Daniel’s Energético',220)">Adicionar</button></div>
-<div class="item"><h4>Jack Maçã</h4><p>R$ 270,00</p><button onclick="add('Combo Jack Maçã',270)">Adicionar</button></div>
-<div class="item"><h4>Jack Maçã Energético</h4><p>R$ 240,00</p><button onclick="add('Combo Jack Maçã Energético',240)">Adicionar</button></div>
-<div class="item"><h4>Beefeater Pink</h4><p>R$ 220,00</p><button onclick="add('Combo Beefeater Pink',220)">Adicionar</button></div>
-<div class="item"><h4>Beefeater Pink Energético</h4><p>R$ 190,00</p><button onclick="add('Combo Beefeater Pink Energético',190)">Adicionar</button></div>
-<div class="item"><h4>Gin Rocks Pink</h4><p>R$ 120,00</p><button onclick="add('Combo Gin Rocks Pink',120)">Adicionar</button></div>
-<div class="item"><h4>Gin Rocks Pink Energético</h4><p>R$ 100,00</p><button onclick="add('Combo Gin Rocks Pink Energético',100)">Adicionar</button></div>
-<div class="item"><h4>Smirnoff</h4><p>R$ 140,00</p><button onclick="add('Combo Smirnoff',140)">Adicionar</button></div>
-<div class="item"><h4>Smirnoff Energético</h4><p>R$ 110,00</p><button onclick="add('Combo Smirnoff Energético',110)">Adicionar</button></div>
+<div class="item"><h4>Camarão Alho e Óleo</h4><p>Inteira R$45 | Meia R$25</p>
+<button onclick="add('Camarão Alho e Óleo (Inteira)',45)">Inteira</button>
+<button onclick="add('Camarão Alho e Óleo (Meia)',25)">Meia</button></div>
 
-<div class="subtitulo">🍹 DESTILADOS & DRINKS</div>
+<div class="item"><h4>Camarão à Milanesa</h4><p>Inteira R$45 | Meia R$25</p>
+<button onclick="add('Camarão à Milanesa (Inteira)',45)">Inteira</button>
+<button onclick="add('Camarão à Milanesa (Meia)',25)">Meia</button></div>
 
-<div class="item"><h4>Ice</h4><p>R$ 10,00</p><button onclick="add('Ice',10)">Adicionar</button></div>
-<div class="item"><h4>Bananinha (garrafa)</h4><p>R$ 50,00</p><button onclick="add('Bananinha Garrafa',50)">Adicionar</button></div>
-<div class="item"><h4>Caipirinha</h4><p>R$ 15,00</p><button onclick="add('Caipirinha',15)">Adicionar</button></div>
-<div class="item"><h4>Gin Sabores (Taça)</h4><p>R$ 25,00</p><button onclick="add('Gin Sabores Taça',25)">Adicionar</button></div>
-<div class="item"><h4>Gin Sabores + Redbull</h4><p>R$ 30,00</p><button onclick="add('Gin Sabores Redbull',30)">Adicionar</button></div>
-<div class="item"><h4>Copão Red Label + Energético</h4><p>R$ 25,00</p><button onclick="add('Copão Red Label Energético',25)">Adicionar</button></div>
-<div class="item"><h4>Copão Red Label + Redbull</h4><p>R$ 35,00</p><button onclick="add('Copão Red Label Redbull',35)">Adicionar</button></div>
+<div class="item"><h4>Batata com Camarão</h4><p>Inteira R$50 | Meia R$30</p>
+<button onclick="add('Batata com Camarão (Inteira)',50)">Inteira</button>
+<button onclick="add('Batata com Camarão (Meia)',30)">Meia</button></div>
 
-<div class="subtitulo">🥤 NÃO ALCOÓLICOS</div>
-
-<div class="item"><h4>Água 500ml</h4><p>R$ 3,00</p><button onclick="add('Água',3)">Adicionar</button></div>
-<div class="item"><h4>Água com gás 500ml</h4><p>R$ 5,00</p><button onclick="add('Água com gás',5)">Adicionar</button></div>
-<div class="item"><h4>Refrigerante lata</h4><p>R$ 7,00</p><button onclick="add('Refrigerante lata',7)">Adicionar</button></div>
-<div class="item"><h4>Guaracrac</h4><p>R$ 3,00</p><button onclick="add('Guaracrac',3)">Adicionar</button></div>
-<div class="item"><h4>Gelo sabores</h4><p>R$ 5,00</p><button onclick="add('Gelo sabores',5)">Adicionar</button></div>
-<div class="item"><h4>Redbull sabores</h4><p>R$ 15,00</p><button onclick="add('Redbull sabores',15)">Adicionar</button></div>
+<div class="item"><h4>Batata Turbinada</h4><p>R$40</p><button onclick="add('Batata Turbinada',40)">Adicionar</button></div>
+<div class="item"><h4>Batata Frita</h4><p>R$25</p><button onclick="add('Batata Frita',25)">Adicionar</button></div>
+<div class="item"><h4>Mandioquinha</h4><p>R$25</p><button onclick="add('Mandioquinha',25)">Adicionar</button></div>
+<div class="item"><h4>Frango à Passarinho</h4><p>R$40</p><button onclick="add('Frango à Passarinho',40)">Adicionar</button></div>
+<div class="item"><h4>Frango à Passarinho com Batata</h4><p>R$50</p><button onclick="add('Frango à Passarinho com Batata',50)">Adicionar</button></div>
 
 </div>
 </section>
 
-<div class="carrinho">
+<!-- ALMOÇO -->
+<section>
+  <h2 onclick="toggle('almoco')">🍽️ Refeições (Almoço)</h2>
+
+  <div id="almoco" class="accordion">
+
+    <div class="item">
+      <h4>Contra-Filé com fritas</h4>
+      <p>R$ 30,00</p>
+      <button id="a1">Adicionar</button>
+    </div>
+
+    <div class="item">
+      <h4>Filé de Peixe com molho de camarão</h4>
+      <p>R$ 30,00</p>
+      <button id="a2">Adicionar</button>
+    </div>
+
+    <div class="item">
+      <h4>Costelinha BBQ</h4>
+      <p>R$ 35,00</p>
+      <button id="a3">Adicionar</button>
+    </div>
+
+    <div class="item">
+      <h4>Picanha com fritas</h4>
+      <p>R$ 35,00</p>
+      <button id="a4">Adicionar</button>
+    </div>
+
+  </div>
+</section>
+
+<script>
+/* BLOQUEIO AUTOMÁTICO DO ALMOÇO */
+(function(){
+  const now = new Date();
+  const day = now.getDay(); // 0 = Domingo | 6 = Sábado
+  const hour = now.getHours();
+
+  const liberado = (day === 0 || day === 6) && (hour >= 12 && hour < 16);
+
+  const botoes = [
+    { id: 'a1', nome: 'Contra-Filé com fritas', valor: 30 },
+    { id: 'a2', nome: 'Filé de Peixe com molho de camarão', valor: 30 },
+    { id: 'a3', nome: 'Costelinha BBQ', valor: 35 },
+    { id: 'a4', nome: 'Picanha com fritas', valor: 35 }
+  ];
+
+  botoes.forEach(b => {
+    const btn = document.getElementById(b.id);
+    if (!btn) return;
+
+    if (liberado) {
+      btn.onclick = () => add(b.nome, b.valor);
+    } else {
+      btn.disabled = true;
+      btn.innerText = 'Disponível somente no almoço';
+    }
+  });
+})();
+</script>
+
+<!-- BEBIDAS -->
+<section>
+<h2 onclick="toggle('bebidas')">🍺 Bebidas</h2>
+<div id="bebidas" class="accordion">
+
+<div class="subtitulo">🍺 Long Neck</div>
+<div class="item"><h4>Heineken</h4><p>R$8</p><button onclick="add('Heineken Long Neck',8)">Adicionar</button></div>
+<div class="item"><h4>Budweiser</h4><p>R$7</p><button onclick="add('Budweiser Long Neck',7)">Adicionar</button></div>
+<div class="item"><h4>Império Gold</h4><p>R$7</p><button onclick="add('Império Gold Long Neck',7)">Adicionar</button></div>
+<div class="item"><h4>Império Lager</h4><p>R$7</p><button onclick="add('Império Lager Long Neck',7)">Adicionar</button></div>
+<div class="item"><h4>Corona</h4><p>R$8</p><button onclick="add('Corona Long Neck',8)">Adicionar</button></div>
+<div class="item"><h4>Stella Artois</h4><p>R$8</p><button onclick="add('Stella Artois Long Neck',8)">Adicionar</button></div>
+
+<div class="subtitulo">🍾 Garrafa 600ml</div>
+<div class="item"><h4>Heineken</h4><p>R$15</p><button onclick="add('Heineken 600ml',15)">Adicionar</button></div>
+<div class="item"><h4>Império Lager</h4><p>R$12</p><button onclick="add('Império Lager 600ml',12)">Adicionar</button></div>
+<div class="item"><h4>Império Gold</h4><p>R$13</p><button onclick="add('Império Gold 600ml',13)">Adicionar</button></div>
+<div class="item"><h4>Stella Artois</h4><p>R$13</p><button onclick="add('Stella Artois 600ml',13)">Adicionar</button></div>
+<div class="item"><h4>Pink Moon</h4><p>R$12</p><button onclick="add('Pink Moon 600ml',12)">Adicionar</button></div>
+
+<div class="subtitulo">🍺 Latão 473ml</div>
+<div class="item"><h4>Brahma</h4><p>R$7</p><button onclick="add('Brahma Latão',7)">Adicionar</button></div>
+<div class="item"><h4>Antarctica</h4><p>R$7</p><button onclick="add('Antarctica Latão',7)">Adicionar</button></div>
+
+<div class="subtitulo">🥃 Combos</div>
+<div class="item"><h4>Red Label</h4><p>R$200</p><button onclick="add('Combo Red Label',200)">Adicionar</button></div>
+<div class="item"><h4>Red Label + Energético</h4><p>R$190</p><button onclick="add('Combo Red Label Energético',190)">Adicionar</button></div>
+<div class="item"><h4>Black Label</h4><p>R$280</p><button onclick="add('Combo Black Label',280)">Adicionar</button></div>
+<div class="item"><h4>Jack Daniel’s</h4><p>R$250</p><button onclick="add('Combo Jack Daniel’s',250)">Adicionar</button></div>
+<div class="item"><h4>Buchanan’s</h4><p>R$300</p><button onclick="add('Combo Buchanan’s',300)">Adicionar</button></div>
+
+<div class="subtitulo">🍹 Destilados & Drinks</div>
+<div class="item"><h4>Ice</h4><p>R$10</p><button onclick="add('Ice',10)">Adicionar</button></div>
+<div class="item"><h4>Bananinha (garrafa)</h4><p>R$50</p><button onclick="add('Bananinha Garrafa',50)">Adicionar</button></div>
+<div class="item"><h4>Caipirinha</h4><p>R$15</p><button onclick="add('Caipirinha',15)">Adicionar</button></div>
+<div class="item"><h4>Gin Sabores</h4><p>R$25</p><button onclick="add('Gin Sabores',25)">Adicionar</button></div>
+<div class="item"><h4>Gin Sabores + Redbull</h4><p>R$30</p><button onclick="add('Gin Sabores + Redbull',30)">Adicionar</button></div>
+<div class="item"><h4>Copão Red Label + Energético</h4><p>R$25</p><button onclick="add('Copão Red Label Energético',25)">Adicionar</button></div>
+<div class="item"><h4>Copão Red Label + Redbull</h4><p>R$35</p><button onclick="add('Copão Red Label Redbull',35)">Adicionar</button></div>
+
+<div class="subtitulo">🥤 Não alcoólicos</div>
+<div class="item"><h4>Água</h4><p>R$3</p><button onclick="add('Água',3)">Adicionar</button></div>
+<div class="item"><h4>Água com gás</h4><p>R$5</p><button onclick="add('Água com gás',5)">Adicionar</button></div>
+<div class="item"><h4>Refrigerante lata</h4><p>R$7</p><button onclick="add('Refrigerante lata',7)">Adicionar</button></div>
+<div class="item"><h4>Guaracamp</h4><p>R$3</p><button onclick="add('Guaracamp',3)">Adicionar</button></div>
+<div class="item"><h4>Gelo sabores</h4><p>R$5</p><button onclick="add('Gelo sabores',5)">Adicionar</button></div>
+<div class="item"><h4>Redbull sabores</h4><p>R$15</p><button onclick="add('Redbull sabores',15)">Adicionar</button></div>
+
+</div>
+</section>
+
+<footer>
+Desenvolvido por <strong>StudioCapta</strong> — Direitos reservados
+</footer>
+
+<div class="cart">
   <span id="total">R$ 0,00</span>
   <div>
     <button onclick="clearCart()">Limpar</button>
@@ -174,36 +270,28 @@ footer{
   </div>
 </div>
 
-<footer>
-Desenvolvido por <strong>StudioCapta</strong> — Direitos reservados
-</footer>
-
 <script>
-let total = 0;
-let itens = [];
-
-function add(nome, valor){
-  itens.push(`${nome} - R$ ${valor.toFixed(2)}`);
-  total += valor;
-  document.getElementById('total').innerText = 'R$ ' + total.toFixed(2);
-}
-
-function clearCart(){
-  total = 0;
-  itens = [];
-  document.getElementById('total').innerText = 'R$ 0,00';
-}
-
-function finish(){
-  let msg = '*Pedido - Armazém do Russo*%0A%0A';
-  itens.forEach(i => msg += '- ' + i + '%0A');
-  msg += `%0A*Total:* R$ ${total.toFixed(2)}`;
-  window.open(`https://wa.me/5521976536117?text=${msg}`,'_blank');
-}
+let total=0;
+let itens=[];
 
 function toggle(id){
-  const el = document.getElementById(id);
-  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+  const el=document.getElementById(id);
+  el.style.display=el.style.display==='block'?'none':'block';
+}
+function add(nome,valor){
+  itens.push(`${nome} - R$ ${valor.toFixed(2)}`);
+  total+=valor;
+  document.getElementById('total').innerText='R$ '+total.toFixed(2);
+}
+function clearCart(){
+  itens=[]; total=0;
+  document.getElementById('total').innerText='R$ 0,00';
+}
+function finish(){
+  let msg='Pedido - Armazém do Russo%0A%0A';
+  itens.forEach(i=>msg+='• '+i+'%0A');
+  msg+=`%0ATotal: R$ ${total.toFixed(2)}`;
+  window.open(`https://wa.me/5521976536117?text=${msg}`);
 }
 </script>
 
