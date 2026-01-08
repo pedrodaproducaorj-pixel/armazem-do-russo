@@ -1,92 +1,119 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Armazém do Russo | Gastrobar</title>
 
 <style>
+:root{
+  --vermelho:#c62828;
+  --dourado:#c9a24d;
+  --preto:#0f0f0f;
+  --cinza:#1c1c1c;
+  --branco:#ffffff;
+}
+
+*{box-sizing:border-box}
+
 body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    background:#0f0f0f;
-    color:#fff;
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--preto);
+  color:var(--branco);
 }
+
 header{
-    text-align:center;
-    padding:30px 15px;
+  text-align:center;
+  padding:20px;
 }
+
 header img{
-    max-width:180px;
-    margin-bottom:15px;
-}
-header h1{
-    color:#e53935;
-    margin:10px 0 5px;
-}
-header p{
-    color:#ccc;
+  max-width:220px;
 }
 
-.section{
-    padding:20px 15px;
-}
-.section h2{
-    border-bottom:1px solid #333;
-    padding-bottom:8px;
-    margin-bottom:15px;
+section{
+  padding:20px;
 }
 
-.card{
-    background:#1c1c1c;
-    border-radius:10px;
-    padding:15px;
-    margin-bottom:12px;
+h2{
+  color:var(--dourado);
+  border-bottom:1px solid #333;
+  padding-bottom:6px;
 }
-.card h3{
-    margin:0;
+
+.item{
+  background:var(--cinza);
+  border-radius:12px;
+  padding:15px;
+  margin-top:12px;
 }
-.price{
-    color:#aaa;
-    margin:5px 0;
+
+.item h3{
+  margin:0;
+  color:var(--branco);
 }
+
+.item p{
+  margin:5px 0 10px;
+  color:#ccc;
+}
+
 button{
-    width:100%;
-    padding:10px;
-    background:#2e7d32;
-    border:none;
-    border-radius:6px;
-    color:#fff;
-    font-size:16px;
-    cursor:pointer;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  background:var(--vermelho);
+  color:white;
+  cursor:pointer;
 }
-button:hover{
-    background:#388e3c;
-}
+
 button:disabled{
-    background:#555;
-    cursor:not-allowed;
+  background:#555;
 }
 
 #cart{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    background:#2ecc71;
-    color:#000;
-    text-align:center;
-    padding:15px;
-    font-weight:bold;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:var(--dourado);
+  color:#000;
+  padding:15px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+
+.modal-content{
+  background:#222;
+  padding:20px;
+  border-radius:12px;
+  width:90%;
+  max-width:320px;
+}
+
+.modal-content h3{
+  text-align:center;
+  margin-bottom:10px;
 }
 
 footer{
-    margin-top:80px;
-    padding:20px;
-    text-align:center;
-    background:#111;
-    color:#777;
-    font-size:14px;
+  text-align:center;
+  font-size:14px;
+  padding:30px 10px 80px;
+  color:#aaa;
 }
 </style>
 </head>
@@ -94,101 +121,135 @@ footer{
 <body>
 
 <header>
-    <img src="logo.png" alt="Armazém do Russo">
-    <h1>Armazém do Russo</h1>
-    <p>Escolha seu pedido e finalize pelo WhatsApp</p>
+  <img src="logo-armazem.png" alt="Armazém do Russo">
 </header>
 
-<!-- PORÇÕES -->
-<div class="section">
+<section>
 <h2>🍟 Porções</h2>
 
-<div class="card"><h3>Picanha c/ Frita e Camarão</h3><p class="price">R$ 140,00 | 1/2 R$ 90,00</p><button onclick="add('Picanha c/ Frita e Camarão',140)">Adicionar</button></div>
-<div class="card"><h3>Picanha com Fritas</h3><p class="price">R$ 90,00 | 1/2 R$ 50,00</p><button onclick="add('Picanha com Fritas',90)">Adicionar</button></div>
-<div class="card"><h3>Gurjão do Russo</h3><p class="price">R$ 55,00 | 1/2 R$ 35,00</p><button onclick="add('Gurjão do Russo',55)">Adicionar</button></div>
-<div class="card"><h3>Gurjão de Peixe</h3><p class="price">R$ 45,00 | 1/2 R$ 25,00</p><button onclick="add('Gurjão de Peixe',45)">Adicionar</button></div>
-<div class="card"><h3>Bolinho de Bacalhau</h3><p class="price">R$ 28,00 | 1/2 R$ 18,00</p><button onclick="add('Bolinho de Bacalhau',28)">Adicionar</button></div>
-<div class="card"><h3>Croquete de Camarão</h3><p class="price">R$ 30,00 | 1/2 R$ 18,00</p><button onclick="add('Croquete de Camarão',30)">Adicionar</button></div>
-<div class="card"><h3>Camarão Alho e Óleo</h3><p class="price">R$ 45,00 | 1/2 R$ 25,00</p><button onclick="add('Camarão Alho e Óleo',45)">Adicionar</button></div>
-<div class="card"><h3>Camarão à Milanesa</h3><p class="price">R$ 45,00 | 1/2 R$ 25,00</p><button onclick="add('Camarão à Milanesa',45)">Adicionar</button></div>
-<div class="card"><h3>Batata com Camarão</h3><p class="price">R$ 50,00 | 1/2 R$ 30,00</p><button onclick="add('Batata com Camarão',50)">Adicionar</button></div>
-<div class="card"><h3>Batata Turbinada</h3><p class="price">R$ 40,00</p><button onclick="add('Batata Turbinada',40)">Adicionar</button></div>
-<div class="card"><h3>Batata Frita</h3><p class="price">R$ 25,00</p><button onclick="add('Batata Frita',25)">Adicionar</button></div>
-<div class="card"><h3>Mandioca</h3><p class="price">R$ 25,00</p><button onclick="add('Mandioca',25)">Adicionar</button></div>
-<div class="card"><h3>Frango à Passarinho</h3><p class="price">R$ 40,00</p><button onclick="add('Frango à Passarinho',40)">Adicionar</button></div>
-<div class="card"><h3>Frango à Passarinho com Batata</h3><p class="price">R$ 50,00</p><button onclick="add('Frango à Passarinho com Batata',50)">Adicionar</button></div>
+<div class="item">
+<h3>Picanha com Fritas</h3>
+<p>R$ 90,00 | 1/2 R$ 50,00</p>
+<button onclick="escolherPorcao('Picanha com Fritas',90,50)">Escolher tamanho</button>
 </div>
 
-<!-- REFEIÇÕES -->
-<div class="section">
-<h2 id="refeicoes-title">🍽️ Refeições — somente aos fins de semana</h2>
-<p id="refeicoes-info" style="color:#bbb; font-size:14px; margin-bottom:15px;">
-Servidas aos sábados e domingos, das 12h às 16h
-</p>
-
-<div class="card"><h3>Contra-Filé com Fritas</h3><p class="price">R$ 30,00</p><button data-refeicao onclick="add('Contra-Filé com Fritas',30)">Adicionar</button></div>
-<div class="card"><h3>Filé de Peixe com Molho de Camarão</h3><p class="price">R$ 30,00</p><button data-refeicao onclick="add('Filé de Peixe com Molho de Camarão',30)">Adicionar</button></div>
-<div class="card"><h3>Costelinha BBQ</h3><p class="price">R$ 35,00</p><button data-refeicao onclick="add('Costelinha BBQ',35)">Adicionar</button></div>
-<div class="card"><h3>Picanha com Fritas</h3><p class="price">R$ 35,00</p><button data-refeicao onclick="add('Picanha com Fritas (Refeição)',35)">Adicionar</button></div>
+<div class="item">
+<h3>Gurjão do Russo</h3>
+<p>R$ 55,00 | 1/2 R$ 35,00</p>
+<button onclick="escolherPorcao('Gurjão do Russo',55,35)">Escolher tamanho</button>
 </div>
 
-<!-- BEBIDAS -->
-<div class="section">
+<div class="item">
+<h3>Bolinho de Bacalhau</h3>
+<p>R$ 28,00 | 1/2 R$ 18,00</p>
+<button onclick="escolherPorcao('Bolinho de Bacalhau',28,18)">Escolher tamanho</button>
+</div>
+</section>
+
+<section>
 <h2>🍺 Bebidas</h2>
 
-<div class="card"><h3>Heineken Long Neck</h3><p class="price">R$ 8,00</p><button onclick="add('Heineken Long Neck',8)">Adicionar</button></div>
-<div class="card"><h3>Budweiser Long Neck</h3><p class="price">R$ 7,00</p><button onclick="add('Budweiser Long Neck',7)">Adicionar</button></div>
-<div class="card"><h3>Corona Long Neck</h3><p class="price">R$ 8,00</p><button onclick="add('Corona Long Neck',8)">Adicionar</button></div>
-<div class="card"><h3>Stella Artois Long Neck</h3><p class="price">R$ 8,00</p><button onclick="add('Stella Artois',8)">Adicionar</button></div>
-<div class="card"><h3>Água 500ml</h3><p class="price">R$ 3,00</p><button onclick="add('Água 500ml',3)">Adicionar</button></div>
-<div class="card"><h3>Refrigerante Lata</h3><p class="price">R$ 7,00</p><button onclick="add('Refrigerante Lata',7)">Adicionar</button></div>
-<div class="card"><h3>RedBull</h3><p class="price">R$ 15,00</p><button onclick="add('RedBull',15)">Adicionar</button></div>
+<div class="item">
+<h3>Heineken Long Neck</h3>
+<p>R$ 8,00</p>
+<button onclick="addItem('Heineken Long Neck',8)">Adicionar</button>
 </div>
 
+<div class="item">
+<h3>Refrigerante Lata</h3>
+<p>R$ 7,00</p>
+<button onclick="addItem('Refrigerante Lata',7)">Adicionar</button>
+</div>
+</section>
+
+<section id="refeicoes">
+<h2>🍽️ Refeições <small>(Somente fins de semana 12h–16h)</small></h2>
+
+<div class="item">
+<h3>Contra-Filé com fritas</h3>
+<p>R$ 30,00</p>
+<button onclick="addItem('Contra-Filé com fritas',30)">Adicionar</button>
+</div>
+
+<div class="item">
+<h3>Filé de Peixe com molho de camarão</h3>
+<p>R$ 30,00</p>
+<button onclick="addItem('Filé de Peixe com molho de camarão',30)">Adicionar</button>
+</div>
+
+<div class="item">
+<h3>Costelinha BBQ</h3>
+<p>R$ 35,00</p>
+<button onclick="addItem('Costelinha BBQ',35)">Adicionar</button>
+</div>
+
+<div class="item">
+<h3>Picanha com fritas</h3>
+<p>R$ 35,00</p>
+<button onclick="addItem('Picanha com fritas (Refeição)',35)">Adicionar</button>
+</div>
+</section>
+
 <footer>
-Desenvolvido por <strong>StudioCapta</strong> — Direitos Reservados
+Desenvolvido por <strong>StudioCapta</strong> — direitos reservados
 </footer>
 
-<div id="cart">🛒 Carrinho — R$ <span id="total">0.00</span></div>
+<div id="cart">Carrinho — R$ <span id="total">0.00</span></div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3 id="modalTitle"></h3>
+    <button id="btnInteira"></button>
+    <button id="btnMeia"></button>
+    <button onclick="closeModal()">Cancelar</button>
+  </div>
+</div>
 
 <script>
-let total = 0;
-let items = [];
+let cart=[]
+let total=0
 
-function add(name, price){
-    total += price;
-    items.push(name + " - R$ " + price.toFixed(2));
-    document.getElementById("total").innerText = total.toFixed(2);
-    document.getElementById("cart").onclick = checkout;
+function updateCart(){
+  document.getElementById('total').innerText=total.toFixed(2)
 }
 
-function checkout(){
-    let text = "Olá! Gostaria de fazer um pedido no Armazém do Russo:%0A%0A";
-    items.forEach(i => text += "- " + i + "%0A");
-    text += "%0ATotal: R$ " + total.toFixed(2);
-    window.open("https://wa.me/5521976536117?text=" + text);
+function addItem(nome,preco){
+  cart.push({nome,preco})
+  total+=preco
+  updateCart()
 }
 
-// BLOQUEIO AUTOMÁTICO REFEIÇÕES
-function verificarHorarioRefeicoes(){
-    const agora = new Date();
-    const dia = agora.getDay(); // 0 domingo | 6 sábado
-    const hora = agora.getHours();
-
-    const permitido = (dia === 0 || dia === 6) && (hora >= 12 && hora < 16);
-    const botoes = document.querySelectorAll('[data-refeicao]');
-    const info = document.getElementById('refeicoes-info');
-
-    if(!permitido){
-        botoes.forEach(btn=>{
-            btn.disabled = true;
-            btn.innerText = 'Indisponível no momento';
-        });
-        info.innerHTML = '⛔ Refeições disponíveis apenas aos sábados e domingos, das 12h às 16h';
-        info.style.color = '#ff5252';
-    }
+function escolherPorcao(nome,inteira,meia){
+  document.getElementById('modalTitle').innerText=nome
+  document.getElementById('btnInteira').innerText=`Porção Inteira — R$ ${inteira.toFixed(2)}`
+  document.getElementById('btnInteira').onclick=()=>{
+    addItem(`${nome} (Inteira)`,inteira)
+    closeModal()
+  }
+  document.getElementById('btnMeia').innerText=`Meia Porção — R$ ${meia.toFixed(2)}`
+  document.getElementById('btnMeia').onclick=()=>{
+    addItem(`${nome} (Meia)`,meia)
+    closeModal()
+  }
+  document.getElementById('modal').style.display='flex'
 }
-verificarHorarioRefeicoes();
+
+function closeModal(){
+  document.getElementById('modal').style.display='none'
+}
+
+function bloquearRefeicoes(){
+  const agora=new Date()
+  const dia=agora.getDay()
+  const hora=agora.getHours()
+  if(!(dia===0||dia===6)||hora<12||hora>=16){
+    document.querySelectorAll('#refeicoes button').forEach(b=>{
+      b.disabled=true
+      b.innerText='Indisponível agora'
+    })
+  }
+}
+bloquearRefeicoes()
 </script>
 
 </body>
