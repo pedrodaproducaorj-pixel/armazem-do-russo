@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Armazém do Russo</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #fff;
+  padding-bottom: 90px; /* espaço pro carrinho */
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+  background: #000;
+}
+
+header h1 {
+  margin: 0;
+  color: #e53935;
+}
+
+header p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+section {
+  padding: 15px;
+}
+
+h2 {
+  margin-top: 20px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
+}
+
+.item {
+  background: #1c1c1c;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.item button {
+  margin-top: 8px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  background: #2e7d32;
+  color: #fff;
+  font-size: 15px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #000;
+  padding: 10px;
+}
+
+footer button {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  background: #25d366;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+}
+
+#cartModal {
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  background: #222;
+  padding: 20px;
+  border-radius: 10px;
+  display: none;
+  max-height: 85%;
+  overflow-y: auto;
+}
+
+#cartModal ul {
+  list-style: none;
+  padding: 0;
+}
+
+.close {
+  background: #555;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.finalizar {
+  background: #25d366;
+  color: #000;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Armazém do Russo</h1>
+  <p>Escolha seu pedido e finalize pelo WhatsApp</p>
+</header>
+
+<main id="menu"></main>
+
+<footer>
+  <button onclick="abrirCarrinho()">
+    🛒 Carrinho — R$ <span id="total">0.00</span>
+  </button>
+</footer>
+
+<div id="cartModal">
+  <h2>Seu pedido</h2>
+  <ul id="cartItems"></ul>
+  <p><strong>Total: R$ <span id="cartTotal">0.00</span></strong></p>
+  <button class="finalizar" onclick="finalizarPedido()">Finalizar no WhatsApp</button>
+  <button class="close" onclick="fecharCarrinho()">Fechar</button>
+</div>
+
+<script>
+const whatsappNumero = "5521999999999"; // TROQUE AQUI
+
+const menuData = [
+  {
+    categoria: "🍟 Petiscos",
+    itens: [
+      { nome: "Batata Frita", preco: 18 },
+      { nome: "Calabresa Acebolada", preco: 25 }
+    ]
+  },
+  {
+    categoria: "🍺 Bebidas",
+    itens: [
+      { nome: "Heineken Long Neck", preco: 9 },
+      { nome: "Refrigerante Lata", preco: 6 }
+    ]
+  }
+];
+
+let carrinho = [];
+
+const menu = document.getElementById("menu");
+
+menuData.forEach(sec => {
+  const section = document.createElement("section");
+  section.innerHTML = `<h2>${sec.categoria}</h2>`;
+
+  sec.itens.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `
+      <strong>${item.nome}</strong><br>
+      R$ ${item.preco.toFixed(2)}<br>
+      <button onclick='adicionarItem("${item.nome}", ${item.preco})'>
+        Adicionar
+      </button>
+    `;
+    section.appendChild(div);
+  });
+
+  menu.appendChild(section);
+});
+
+function adicionarItem(nome, preco) {
+  carrinho.push({ nome, preco });
+  atualizarTotal();
+}
+
+function atualizarTotal() {
+  const total = carrinho.reduce((s, i) => s + i.preco, 0);
+  document.getElementById("total").innerText = total.toFixed(2);
+  document.getElementById("cartTotal").innerText = total.toFixed(2);
+}
+
+function abrirCarrinho() {
+  listarCarrinho();
+  document.getElementById("cartModal").style.display = "block";
+}
+
+function fecharCarrinho() {
+  document.getElementById("cartModal").style.display = "none";
+}
+
+function listarCarrinho() {
+  const ul = document.getElementById("cartItems");
+  ul.innerHTML = "";
+  carrinho.forEach(item => {
+    const li = document.createElement("li");
+    li.innerText = `• ${item.nome} — R$ ${item.preco.toFixed(2)}`;
+    ul.appendChild(li);
+  });
+}
+
+function finalizarPedido() {
+  let mensagem = "Olá! Quero fazer um pedido no Armazém do Russo:%0A%0A";
+  carrinho.forEach(i => {
+    mensagem += `• ${i.nome} - R$ ${i.preco.toFixed(2)}%0A`;
+  });
+  const total = carrinho.reduce((s, i) => s + i.preco, 0);
+  mensagem += `%0ATotal: R$ ${total.toFixed(2)}%0A%0APode me informar taxa de entrega e forma de pagamento?`;
+
+  window.open(`https://wa.me/${whatsappNumero}?text=${mensagem}`, "_blank");
+}
+</script>
+
+</body>
+</html>
