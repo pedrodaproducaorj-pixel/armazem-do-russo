@@ -3,126 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Armazém do Russo | Gastrobar</title>
+<title>Armazém do Russo</title>
 
 <style>
 :root{
   --vermelho:#c62828;
   --dourado:#c9a24d;
   --preto:#0f0f0f;
-  --cinza:#1c1c1c;
-  --cinza2:#2a2a2a;
-  --branco:#fff;
+  --card:#1c1c1c;
 }
-
 *{box-sizing:border-box}
-
 body{
   margin:0;
-  font-family:Arial,sans-serif;
   background:var(--preto);
-  color:var(--branco);
+  color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
 }
-
 header{
   text-align:center;
   padding:20px;
 }
-
-header img{
-  max-width:220px;
+header img{max-width:160px}
+header h1{
+  color:var(--vermelho);
+  font-size:34px;
+  margin:10px 0;
 }
-
-section{
-  padding:20px;
+header .horarios{
+  color:var(--dourado);
+  font-size:14px;
+  line-height:1.4;
 }
-
+section{padding:15px}
 h2{
   color:var(--dourado);
-  border-bottom:1px solid #333;
-  padding-bottom:6px;
+  margin-top:30px;
   cursor:pointer;
 }
-
-.accordion-content{
-  display:none;
-}
-
+.accordion{display:none}
 .item{
-  background:var(--cinza);
-  border-radius:14px;
+  background:var(--card);
   padding:15px;
-  margin-top:12px;
+  border-radius:12px;
+  margin-bottom:12px;
 }
-
-.item h3{margin:0}
-.item p{margin:6px 0;color:#ccc}
-
+.item h4{margin:0 0 5px}
+.item p{margin:0 0 10px;color:#ccc}
 button{
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:8px;
   background:var(--vermelho);
   color:#fff;
-  font-size:16px;
-  cursor:pointer;
+  border:none;
+  border-radius:8px;
+  padding:10px;
+  width:100%;
+  font-size:15px;
 }
-
-button.sec{
-  background:var(--cinza2);
-  border:1px solid #444;
-  margin-top:6px;
-}
-
-button:disabled{
-  background:#555;
-  cursor:not-allowed;
-}
-
-#cart{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:var(--dourado);
-  color:#000;
-  padding:12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.subtitulo{
+  margin:20px 0 10px;
+  color:var(--dourado);
   font-weight:bold;
 }
-
-#cart button{
-  width:auto;
-  background:#000;
-  color:#fff;
-  padding:8px 14px;
-  border-radius:6px;
-}
-
-.modal{
-  display:none;
+.carrinho{
   position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.85);
-  justify-content:center;
-  align-items:center;
-  z-index:999;
+  bottom:0;left:0;right:0;
+  background:var(--dourado);
+  display:flex;
+  justify-content:space-between;
+  padding:10px;
 }
-
-.modal-content{
-  background:#1e1e1e;
-  padding:20px;
-  border-radius:12px;
-  width:90%;
-  max-width:320px;
+.carrinho span{color:#000;font-weight:bold}
+.carrinho button{
+  background:#000;
+  width:auto;
+  margin-left:8px;
 }
-
 footer{
   text-align:center;
-  padding:30px 10px 110px;
+  padding:20px;
+  font-size:13px;
   color:#aaa;
 }
 </style>
@@ -131,174 +89,122 @@ footer{
 <body>
 
 <header>
-  <img src="logo-armazem.png" alt="Armazém do Russo">
+  <img src="logo.png" alt="Armazém do Russo">
+  <h1>ARMAZÉM DO RUSSO</h1>
+  <div class="horarios">
+    HORÁRIOS:<br>
+    Quarta e Quinta – 17h às 23:30<br>
+    Sexta – 17h às 00h<br>
+    Sábado – 12h às 00h<br>
+    Domingo – 12h às 23h
+  </div>
 </header>
 
-<!-- PORÇÕES -->
-<section>
-<h2 onclick="toggle('porcoes')">🍟 Porções</h2>
-<div id="porcoes" class="accordion-content">
-
-<div class="item">
-<h3>Picanha com Fritas</h3>
-<p>Inteira R$ 90,00 | Meia R$ 50,00</p>
-<button onclick="openSize('Picanha com Fritas',90,50)">Escolher tamanho</button>
-</div>
-
-<div class="item">
-<h3>Gurjão do Russo</h3>
-<p>Inteira R$ 55,00 | Meia R$ 35,00</p>
-<button onclick="openSize('Gurjão do Russo',55,35)">Escolher tamanho</button>
-</div>
-
-<div class="item">
-<h3>Bolinho de Bacalhau</h3>
-<p>Inteira R$ 28,00 | Meia R$ 18,00</p>
-<button onclick="openSize('Bolinho de Bacalhau',28,18)">Escolher tamanho</button>
-</div>
-
-<div class="item">
-<h3>Frango à Passarinho</h3>
-<p>R$ 40,00</p>
-<button onclick="addItem('Frango à Passarinho',40)">Adicionar</button>
-</div>
-
-</div>
-</section>
-
-<!-- BEBIDAS -->
 <section>
 <h2 onclick="toggle('bebidas')">🍺 Bebidas</h2>
-<div id="bebidas" class="accordion-content">
+<div id="bebidas" class="accordion">
 
-<div class="item"><h3>Heineken Long Neck</h3><p>R$ 8,00</p><button onclick="addItem('Heineken Long Neck',8)">Adicionar</button></div>
-<div class="item"><h3>Budweiser Long Neck</h3><p>R$ 7,00</p><button onclick="addItem('Budweiser Long Neck',7)">Adicionar</button></div>
-<div class="item"><h3>Refrigerante Lata</h3><p>R$ 7,00</p><button onclick="addItem('Refrigerante Lata',7)">Adicionar</button></div>
-<div class="item"><h3>Água</h3><p>R$ 3,00</p><button onclick="addItem('Água',3)">Adicionar</button></div>
+<div class="subtitulo">🍺 CERVEJAS — LONG NECK</div>
+
+<div class="item"><h4>Heineken</h4><p>R$ 8,00</p><button onclick="add('Heineken Long Neck',8)">Adicionar</button></div>
+<div class="item"><h4>Budweiser</h4><p>R$ 7,00</p><button onclick="add('Budweiser Long Neck',7)">Adicionar</button></div>
+<div class="item"><h4>Império Gold</h4><p>R$ 7,00</p><button onclick="add('Império Gold Long Neck',7)">Adicionar</button></div>
+<div class="item"><h4>Império Lager</h4><p>R$ 7,00</p><button onclick="add('Império Lager Long Neck',7)">Adicionar</button></div>
+<div class="item"><h4>Corona</h4><p>R$ 8,00</p><button onclick="add('Corona Long Neck',8)">Adicionar</button></div>
+<div class="item"><h4>Stella Artois</h4><p>R$ 8,00</p><button onclick="add('Stella Artois Long Neck',8)">Adicionar</button></div>
+
+<div class="subtitulo">🍾 GARRAFA 600ML</div>
+
+<div class="item"><h4>Heineken</h4><p>R$ 15,00</p><button onclick="add('Heineken 600ml',15)">Adicionar</button></div>
+<div class="item"><h4>Império Lager</h4><p>R$ 12,00</p><button onclick="add('Império Lager 600ml',12)">Adicionar</button></div>
+<div class="item"><h4>Império Gold</h4><p>R$ 13,00</p><button onclick="add('Império Gold 600ml',13)">Adicionar</button></div>
+<div class="item"><h4>Stella Artois</h4><p>R$ 13,00</p><button onclick="add('Stella Artois 600ml',13)">Adicionar</button></div>
+<div class="item"><h4>Pink Moon</h4><p>R$ 12,00</p><button onclick="add('Pink Moon 600ml',12)">Adicionar</button></div>
+
+<div class="subtitulo">🍺 LATÃO 473ML</div>
+
+<div class="item"><h4>Brahma</h4><p>R$ 7,00</p><button onclick="add('Brahma Latão',7)">Adicionar</button></div>
+<div class="item"><h4>Antarctica</h4><p>R$ 7,00</p><button onclick="add('Antarctica Latão',7)">Adicionar</button></div>
+<div class="subtitulo">🥃 COMBOS</div>
+
+<div class="item"><h4>Red Label</h4><p>R$ 200,00</p><button onclick="add('Combo Red Label',200)">Adicionar</button></div>
+<div class="item"><h4>Red Label Energético</h4><p>R$ 190,00</p><button onclick="add('Combo Red Label Energético',190)">Adicionar</button></div>
+<div class="item"><h4>Black Label</h4><p>R$ 280,00</p><button onclick="add('Combo Black Label',280)">Adicionar</button></div>
+<div class="item"><h4>Black Label Energético</h4><p>R$ 260,00</p><button onclick="add('Combo Black Label Energético',260)">Adicionar</button></div>
+<div class="item"><h4>Buchanan's</h4><p>R$ 300,00</p><button onclick="add('Combo Buchanan’s',300)">Adicionar</button></div>
+<div class="item"><h4>Buchanan's Energético</h4><p>R$ 280,00</p><button onclick="add('Combo Buchanan’s Energético',280)">Adicionar</button></div>
+<div class="item"><h4>Jack Daniel’s</h4><p>R$ 250,00</p><button onclick="add('Combo Jack Daniel’s',250)">Adicionar</button></div>
+<div class="item"><h4>Jack Daniel’s Energético</h4><p>R$ 220,00</p><button onclick="add('Combo Jack Daniel’s Energético',220)">Adicionar</button></div>
+<div class="item"><h4>Jack Maçã</h4><p>R$ 270,00</p><button onclick="add('Combo Jack Maçã',270)">Adicionar</button></div>
+<div class="item"><h4>Jack Maçã Energético</h4><p>R$ 240,00</p><button onclick="add('Combo Jack Maçã Energético',240)">Adicionar</button></div>
+<div class="item"><h4>Beefeater Pink</h4><p>R$ 220,00</p><button onclick="add('Combo Beefeater Pink',220)">Adicionar</button></div>
+<div class="item"><h4>Beefeater Pink Energético</h4><p>R$ 190,00</p><button onclick="add('Combo Beefeater Pink Energético',190)">Adicionar</button></div>
+<div class="item"><h4>Gin Rocks Pink</h4><p>R$ 120,00</p><button onclick="add('Combo Gin Rocks Pink',120)">Adicionar</button></div>
+<div class="item"><h4>Gin Rocks Pink Energético</h4><p>R$ 100,00</p><button onclick="add('Combo Gin Rocks Pink Energético',100)">Adicionar</button></div>
+<div class="item"><h4>Smirnoff</h4><p>R$ 140,00</p><button onclick="add('Combo Smirnoff',140)">Adicionar</button></div>
+<div class="item"><h4>Smirnoff Energético</h4><p>R$ 110,00</p><button onclick="add('Combo Smirnoff Energético',110)">Adicionar</button></div>
+
+<div class="subtitulo">🍹 DESTILADOS & DRINKS</div>
+
+<div class="item"><h4>Ice</h4><p>R$ 10,00</p><button onclick="add('Ice',10)">Adicionar</button></div>
+<div class="item"><h4>Bananinha (garrafa)</h4><p>R$ 50,00</p><button onclick="add('Bananinha Garrafa',50)">Adicionar</button></div>
+<div class="item"><h4>Caipirinha</h4><p>R$ 15,00</p><button onclick="add('Caipirinha',15)">Adicionar</button></div>
+<div class="item"><h4>Gin Sabores (Taça)</h4><p>R$ 25,00</p><button onclick="add('Gin Sabores Taça',25)">Adicionar</button></div>
+<div class="item"><h4>Gin Sabores + Redbull</h4><p>R$ 30,00</p><button onclick="add('Gin Sabores Redbull',30)">Adicionar</button></div>
+<div class="item"><h4>Copão Red Label + Energético</h4><p>R$ 25,00</p><button onclick="add('Copão Red Label Energético',25)">Adicionar</button></div>
+<div class="item"><h4>Copão Red Label + Redbull</h4><p>R$ 35,00</p><button onclick="add('Copão Red Label Redbull',35)">Adicionar</button></div>
+
+<div class="subtitulo">🥤 NÃO ALCOÓLICOS</div>
+
+<div class="item"><h4>Água 500ml</h4><p>R$ 3,00</p><button onclick="add('Água',3)">Adicionar</button></div>
+<div class="item"><h4>Água com gás 500ml</h4><p>R$ 5,00</p><button onclick="add('Água com gás',5)">Adicionar</button></div>
+<div class="item"><h4>Refrigerante lata</h4><p>R$ 7,00</p><button onclick="add('Refrigerante lata',7)">Adicionar</button></div>
+<div class="item"><h4>Guaracrac</h4><p>R$ 3,00</p><button onclick="add('Guaracrac',3)">Adicionar</button></div>
+<div class="item"><h4>Gelo sabores</h4><p>R$ 5,00</p><button onclick="add('Gelo sabores',5)">Adicionar</button></div>
+<div class="item"><h4>Redbull sabores</h4><p>R$ 15,00</p><button onclick="add('Redbull sabores',15)">Adicionar</button></div>
 
 </div>
 </section>
 
-<!-- REFEIÇÕES -->
-<section>
-<h2>🍽️ Refeições (Somente fins de semana 12h–16h)</h2>
-
-<div class="item">
-<h3>Contra-Filé com fritas</h3>
-<p>R$ 30,00</p>
-<button id="r1">Adicionar</button>
+<div class="carrinho">
+  <span id="total">R$ 0,00</span>
+  <div>
+    <button onclick="clearCart()">Limpar</button>
+    <button onclick="finish()">Finalizar</button>
+  </div>
 </div>
-
-<div class="item">
-<h3>Filé de Peixe com molho de camarão</h3>
-<p>R$ 30,00</p>
-<button id="r2">Adicionar</button>
-</div>
-
-<div class="item">
-<h3>Costelinha BBQ</h3>
-<p>R$ 35,00</p>
-<button id="r3">Adicionar</button>
-</div>
-
-<div class="item">
-<h3>Picanha com fritas</h3>
-<p>R$ 35,00</p>
-<button id="r4">Adicionar</button>
-</div>
-
-</section>
 
 <footer>
-Desenvolvido por <strong>StudioCapta</strong> — direitos reservados
+Desenvolvido por <strong>StudioCapta</strong> — Direitos reservados
 </footer>
 
-<div id="cart">
-<span>R$ <span id="total">0.00</span></span>
-<div>
-<button onclick="clearCart()">Limpar</button>
-<button onclick="sendWhats()">Finalizar</button>
-</div>
-</div>
-
-<!-- MODAL TAMANHO -->
-<div class="modal" id="sizeModal">
-<div class="modal-content">
-<h3 id="sizeTitle"></h3>
-<button onclick="chooseSize('Inteira')">Inteira</button>
-<button class="sec" onclick="chooseSize('Meia')">Meia</button>
-<button class="sec" onclick="closeModal()">Cancelar</button>
-</div>
-</div>
-
 <script>
-let cart=[]
-let total=0
-let currentItem=null
+let total = 0;
+let itens = [];
 
-function toggle(id){
-  const el=document.getElementById(id)
-  el.style.display=el.style.display==='block'?'none':'block'
-}
-
-function addItem(name,price){
-  cart.push(`${name} - R$ ${price.toFixed(2)}`)
-  total+=price
-  update()
-}
-
-function openSize(name,full,half){
-  currentItem={name,full,half}
-  document.getElementById('sizeTitle').innerText=name
-  document.getElementById('sizeModal').style.display='flex'
-}
-
-function chooseSize(type){
-  let price=type==='Inteira'?currentItem.full:currentItem.half
-  cart.push(`${currentItem.name} (${type}) - R$ ${price.toFixed(2)}`)
-  total+=price
-  closeModal()
-  update()
-}
-
-function closeModal(){
-  document.getElementById('sizeModal').style.display='none'
-}
-
-function update(){
-  document.getElementById('total').innerText=total.toFixed(2)
+function add(nome, valor){
+  itens.push(`${nome} - R$ ${valor.toFixed(2)}`);
+  total += valor;
+  document.getElementById('total').innerText = 'R$ ' + total.toFixed(2);
 }
 
 function clearCart(){
-  cart=[]
-  total=0
-  update()
+  total = 0;
+  itens = [];
+  document.getElementById('total').innerText = 'R$ 0,00';
 }
 
-function sendWhats(){
-  let msg='Pedido - Armazém do Russo%0A%0A'
-  cart.forEach(i=>msg+=`• ${i}%0A`)
-  msg+=`%0ATotal: R$ ${total.toFixed(2)}`
-  window.open(`https://wa.me/5521976536117?text=${msg}`)
+function finish(){
+  let msg = '*Pedido - Armazém do Russo*%0A%0A';
+  itens.forEach(i => msg += '- ' + i + '%0A');
+  msg += `%0A*Total:* R$ ${total.toFixed(2)}`;
+  window.open(`https://wa.me/5521976536117?text=${msg}`,'_blank');
 }
 
-// BLOQUEIO REFEIÇÕES
-(function(){
-  const d=new Date()
-  const day=d.getDay()
-  const h=d.getHours()
-  if(!(day===0||day===6)||h<12||h>=16){
-    document.querySelectorAll('#r1,#r2,#r3,#r4').forEach(b=>{
-      b.disabled=true
-      b.innerText='Indisponível agora'
-    })
-  }else{
-    r1.onclick=()=>addItem('Contra-Filé com fritas',30)
-    r2.onclick=()=>addItem('Filé de Peixe com molho de camarão',30)
-    r3.onclick=()=>addItem('Costelinha BBQ',35)
-    r4.onclick=()=>addItem('Picanha com fritas',35)
-  }
-})();
+function toggle(id){
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
 </script>
 
 </body>
